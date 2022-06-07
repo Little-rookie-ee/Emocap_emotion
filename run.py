@@ -92,7 +92,7 @@ def get_dataset(data, logger, data_type ,text_type, audio_type):
     return dataset
 
 
-
+'''
 ## 获取bert的文本输入、获wav2vec2编码的音频特征
 def get_dataset1(data, logger, data_type):
     logger.info('Start creat {} dataset type 1'.format(data_type))
@@ -124,14 +124,14 @@ def get_dataset1(data, logger, data_type):
             text_ids.append(text_input['input_ids'])
             text_attention_mask.append(text_input['attention_mask'])
             text_token_type_ids.append(text_input['token_type_ids'])
-            '''
-            audio_fea = [0.0]*args.audio_max_len
-            if len(example.audio) >= args.audio_max_len:
-                audio_fea[:] = example.audio[:args.audio_max_len]
-            else:
-                audio_fea[:len(example.audio)] = example.audio[:]
-            assert len(audio_fea) == args.audio_max_len, 'Error with audio input length {} vs {}'.format(len(audio_fea), args.audio_max_len)
-            '''
+            
+            # audio_fea = [0.0]*args.audio_max_len
+            # if len(example.audio) >= args.audio_max_len:
+            #     audio_fea[:] = example.audio[:args.audio_max_len]
+            # else:
+            #     audio_fea[:len(example.audio)] = example.audio[:]
+            # assert len(audio_fea) == args.audio_max_len, 'Error with audio input length {} vs {}'.format(len(audio_fea), args.audio_max_len)
+            
             audio_fea = wav2vec2_processor(example.audio, sampling_rate=args.sample_rate, return_tensors='pt')
             audio_fea = wav2vec2(**audio_fea).last_hidden_state[0]
             # print(audio_fea[0])
@@ -225,7 +225,7 @@ def get_dataset2(data, logger, data_type):
     dataset = TensorDataset(f.audio_inputs, f.text_ids, f.text_attention_mask, f.text_token_type_ids, f.labels)
     logger.info('Finish creat {} dataset'.format(data_type))
     return dataset
-
+'''
 
 def train(train_dataloader, dev_dataloader, test_dataloader, logger):
     logger.info('--------Start train--------')
