@@ -1,0 +1,20 @@
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--data_dir', default='./data', type=str, help='path of data')
+parser.add_argument('--saved_model_path', default='./saved_model/', type=str, help='model saved path')
+parser.add_argument('--log_dir', default='./log', type=str, help='log saved path')
+parser.add_argument('--device', default='cuda:0', type=str, help='device of running')
+parser.add_argument('--bert_path', default='/workspace/practice/文本情感分析/预训练模型/bert-base-uncased', type=str, help='path of bert')
+parser.add_argument('--wav2vec2_path', default='./pretrained_model/wav2vec2-base-960h', type=str, help='path of pretrained model wav2vec2 ')
+parser.add_argument('--text_max_len', default=64, type=int, help='max length of text for input')
+# parser.add_argument('--audio_max_len', default=449, type=int, help='max length of audio sequence for input')
+parser.add_argument('--processed_data_path', default='./processed_data6', type=str, help='path of processed data in train and so on')
+parser.add_argument('--sample_rate', default=16000, type=int, help='audio sample rate')
+parser.add_argument('--epoch', default=100, type=int, help='train epoch')
+parser.add_argument('--lr', default=0.0001, type=float, help='learning rate')
+parser.add_argument('--batch_size', default=64, type=int, help='batch size')
+parser.add_argument('--audio_type', default='mfcc', required=True, type=str, help=' choose audio feature from (wav2vec2, mfcc, hubert)')
+parser.add_argument('--text_type', default='bert', required=True, type=str, help='choose text input type from (bert)')
+
+args = parser.parse_args()
